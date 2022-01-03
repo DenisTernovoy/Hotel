@@ -52,7 +52,7 @@ def accept_all():
         if name.get().isalpha():
             flag_name = True
         else:
-            wrong_name = tk.Label(text='* Используйте только буквы!',
+            wrong_name = tk.Label(text='*',
                                   foreground='red')
             wrong_name.grid(row=3, column=2, columnspan=2, stick='w')
 
@@ -60,7 +60,7 @@ def accept_all():
         if surname.get().isalpha():
             flag_surname = True
         else:
-            wrong_surname = tk.Label(text='* Используйте только буквы!',
+            wrong_surname = tk.Label(text='*',
                                   foreground='red')
             wrong_surname.grid(row=4, column=2, columnspan=2, stick='w')
 
@@ -68,7 +68,7 @@ def accept_all():
         if l_name.get().isalpha():
             flag_l_name = True
         else:
-            wrong_l_name = tk.Label(text='* Используйте только буквы!',
+            wrong_l_name = tk.Label(text='*',
                                   foreground='red')
             wrong_l_name.grid(row=5, column=2, columnspan=2, stick='w')
 
@@ -103,7 +103,6 @@ def accept_all():
                               foreground='black',
                               bg='green')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
-    print(DICT)
 
 def delete_all():
     name.delete(0, tk.END)
