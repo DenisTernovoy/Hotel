@@ -1,12 +1,10 @@
 import tkinter as tk
 from rooms import main_win
+import json
 
 rooms = []
 count = 0
 
-DICT = {
-    'Guests': []
-}
 
 def accept_all():
     global wrong_name, wrong_surname, wrong_l_name, result, count, wrong_series_passport, wrong_numbers_passport
@@ -94,19 +92,31 @@ def accept_all():
     # конечная проверка данных
 
     if flag_name and flag_surname and flag_l_name and flag_series_passport and flag_numbers_passport:
-        if f'{series_passport.get()}{numbers_passport.get()}' in DICT['Guests']:
+
+        with open('data.json', 'r') as json_file:
+            j_dict = json.load(json_file)
+            print(j_dict)
+
+        if f'{series_passport.get()}_{numbers_passport.get()}' in j_dict['Guests']:
             result = tk.Label(text='Гость уже зарегестрирован!',
                               foreground='black',
                               bg='red')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
         else:
-            count += 1
-            DICT['Guests'].append(f'{series_passport.get()}{numbers_passport.get()}')
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'] = dict()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Name'] = name.get()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Surname'] = surname.get()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Lastname'] = l_name.get()
+
+            with open('data.json', 'w') as json_file:
+                json.dump(j_dict, json_file, indent=4)
+                print(j_dict)
+
             result = tk.Label(text='Успешная регистрация!',
                               foreground='black',
                               bg='green')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
-            main_win()
+            main_win(f'{series_passport.get()}_{numbers_passport.get()}')
 
 
 def delete_all():

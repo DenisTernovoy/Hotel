@@ -1,11 +1,19 @@
 import tkinter as tk
-rooms = []
+import json
 
 def choice_room(btn, room):
     btn['state'] = tk.DISABLED
     btn['bg'] = 'red'
-    win_r.destroy()
-    rooms.append(room)
+
+    with open('data.json', 'r') as json_file:
+        j_dict = json.load(json_file)
+
+
+    j_dict['Guests'][ID]['Room'] = room
+
+    with open('data.json', 'w') as json_file:
+        json.dump(j_dict, json_file, indent=4)
+
 
 
 
@@ -14,9 +22,9 @@ def check_room(room):
     room['bg'] = 'red'
 
 
-def main_win():
-    global room_1, room_2, room_3, room_4, win_r
-
+def main_win(a):
+    global room_1, room_2, room_3, room_4, win_r, ID
+    ID = a
     # конфигурация главного окна
 
     win_r = tk.Tk()
@@ -92,38 +100,42 @@ def main_win():
     room_25 = tk.Button(win_r, text='25', bg='green', bd=2, command=lambda: choice_room(room_25, 25))
     room_25.grid(row=5, column=5, padx=3, pady=3, stick='wens')
 
-    for room in rooms:
-        try:
-            DICT = {
-                '1': room_1,
-                '2': room_2,
-                '3': room_3,
-                '4': room_4,
-                '5': room_5,
-                '6': room_6,
-                '7': room_7,
-                '8': room_8,
-                '9': room_9,
-                '10': room_10,
-                '11': room_11,
-                '12': room_12,
-                '13': room_13,
-                '14': room_14,
-                '15': room_15,
-                '16': room_16,
-                '17': room_17,
-                '18': room_18,
-                '19': room_19,
-                '20': room_20,
-                '21': room_21,
-                '22': room_22,
-                '23': room_23,
-                '24': room_24,
-                '25': room_25,
-            }
-            check_room(DICT[str(room)])
-        except Exception:
-            pass
+    with open('data.json', 'r') as json_file:
+        j_dict = json.load(json_file)
+
+    for guest in j_dict['Guests']:
+        if j_dict['Guests'][guest].get("Room", None):
+            try:
+                DICT = {
+                    '1': room_1,
+                    '2': room_2,
+                    '3': room_3,
+                    '4': room_4,
+                    '5': room_5,
+                    '6': room_6,
+                    '7': room_7,
+                    '8': room_8,
+                    '9': room_9,
+                    '10': room_10,
+                    '11': room_11,
+                    '12': room_12,
+                    '13': room_13,
+                    '14': room_14,
+                    '15': room_15,
+                    '16': room_16,
+                    '17': room_17,
+                    '18': room_18,
+                    '19': room_19,
+                    '20': room_20,
+                    '21': room_21,
+                    '22': room_22,
+                    '23': room_23,
+                    '24': room_24,
+                    '25': room_25,
+                }
+                check_room(DICT[str(j_dict['Guests'][guest]['Room'])])
+            except Exception:
+                pass
 
     win_r.mainloop()
 
