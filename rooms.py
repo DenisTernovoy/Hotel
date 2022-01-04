@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 
+
 def choice_room(btn, room):
     btn['state'] = tk.DISABLED
     btn['bg'] = 'red'
@@ -8,12 +9,12 @@ def choice_room(btn, room):
     with open('data.json', 'r') as json_file:
         j_dict = json.load(json_file)
 
-
     j_dict['Guests'][ID]['Room'] = room
 
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
 
+    win_r.destroy()
 
 
 

@@ -3,7 +3,6 @@ from rooms import main_win
 from login import main_log
 import json
 
-rooms = []
 count = 0
 
 
@@ -93,7 +92,11 @@ def accept_all():
     # конечная проверка данных
 
     if flag_name and flag_surname and flag_l_name and flag_series_passport and flag_numbers_passport:
-        if f'{series_passport.get()}{numbers_passport.get()}' in DICT['Guests']:
+
+        with open('data.json', 'r') as json_file:
+            j_dict = json.load(json_file)
+
+        if f'{series_passport.get()}_{numbers_passport.get()}' in j_dict['Guests']:
             result = tk.Label(text='Гость уже зарегестрирован!',
                               foreground='black',
                               bg='red')
