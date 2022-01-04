@@ -5,6 +5,7 @@ DICT = {
     'Guests': []
 }
 
+
 def accept_all():
     global wrong_name, wrong_surname, wrong_l_name, result, count, wrong_series_passport, wrong_numbers_passport
 
@@ -14,7 +15,7 @@ def accept_all():
     flag_series_passport = False
     flag_numbers_passport = False
 
-# удаление уведомлений об ошибках ввода
+    # удаление уведомлений об ошибках ввода
 
     try:
         wrong_name.grid_forget()
@@ -46,7 +47,7 @@ def accept_all():
     except Exception:
         pass
 
-# проверка ввода данных в каждый участок
+    # проверка ввода данных в каждый участок
 
     if name.get():
         if name.get().isalpha():
@@ -61,7 +62,7 @@ def accept_all():
             flag_surname = True
         else:
             wrong_surname = tk.Label(text='*',
-                                  foreground='red')
+                                     foreground='red')
             wrong_surname.grid(row=4, column=2, columnspan=2, stick='w')
 
     if l_name.get():
@@ -69,7 +70,7 @@ def accept_all():
             flag_l_name = True
         else:
             wrong_l_name = tk.Label(text='*',
-                                  foreground='red')
+                                    foreground='red')
             wrong_l_name.grid(row=5, column=2, columnspan=2, stick='w')
 
     if series_passport.get():
@@ -77,7 +78,7 @@ def accept_all():
             flag_series_passport = True
         else:
             wrong_series_passport = tk.Label(text='*',
-                                    foreground='red')
+                                             foreground='red')
             wrong_series_passport.grid(row=3, column=4, stick='e')
 
     if numbers_passport.get():
@@ -85,24 +86,25 @@ def accept_all():
             flag_numbers_passport = True
         else:
             wrong_numbers_passport = tk.Label(text='*',
-                                    foreground='red')
+                                              foreground='red')
             wrong_numbers_passport.grid(row=4, column=4, stick='e')
 
-# конечная проверка данных
+    # конечная проверка данных
 
     if flag_name and flag_surname and flag_l_name and flag_series_passport and flag_numbers_passport:
-         # if f'' in DICT['Guests']:
-         #     result = tk.Label(text='Гость уже зарегестрирован!',
-         #                       foreground='black',
-         #                       bg='red')
-         #     result.grid(row=3, column=3, columnspan=2, stick='wens', rowspan=2)
-         # else:
+        if f'{series_passport.get()}{numbers_passport.get()}' in DICT['Guests']:
+            result = tk.Label(text='Гость уже зарегестрирован!',
+                              foreground='black',
+                              bg='red')
+            result.grid(row=1, column=0, columnspan=6, stick='wens')
+        else:
             count += 1
-            #DICT['Guests'].append()
+            DICT['Guests'].append(f'{series_passport.get()}{numbers_passport.get()}')
             result = tk.Label(text='Успешная регистрация!',
                               foreground='black',
                               bg='green')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
+
 
 def delete_all():
     name.delete(0, tk.END)
@@ -115,6 +117,7 @@ def delete_all():
         result.grid_forget()
     except Exception:
         pass
+
 
 # конфигурация главного окна
 
@@ -139,7 +142,7 @@ win.rowconfigure(5, minsize=40)
 tk.Label(text="Гранд Отель",
          bg='#D0D5DE',
          font=("Arial", 20, 'bold')
-         ).grid(row=0, column=0, columnspan=6, stick = 'wens')
+         ).grid(row=0, column=0, columnspan=6, stick='wens')
 
 win.resizable(False, False)
 
@@ -172,6 +175,5 @@ tk.Button(text='Принять',
 
 tk.Button(text='Очистить',
           command=delete_all, bd=3).grid(row=6, column=1, pady=20)
-
 
 win.mainloop()
