@@ -1,5 +1,6 @@
 import tkinter as tk
 from rooms import main_win
+from login import main_log
 import json
 
 rooms = []
@@ -92,12 +93,7 @@ def accept_all():
     # конечная проверка данных
 
     if flag_name and flag_surname and flag_l_name and flag_series_passport and flag_numbers_passport:
-
-        with open('data.json', 'r') as json_file:
-            j_dict = json.load(json_file)
-            print(j_dict)
-
-        if f'{series_passport.get()}_{numbers_passport.get()}' in j_dict['Guests']:
+        if f'{series_passport.get()}{numbers_passport.get()}' in DICT['Guests']:
             result = tk.Label(text='Гость уже зарегестрирован!',
                               foreground='black',
                               bg='red')
@@ -131,6 +127,9 @@ def delete_all():
     except Exception:
         pass
 
+
+def log_in():
+    main_log()
 
 # конфигурация главного окна
 
@@ -189,6 +188,7 @@ tk.Button(text='Принять',
 tk.Button(text='Очистить',
           command=delete_all, bd=3).grid(row=6, column=1, pady=20)
 
-win.mainloop()
+tk.Button(text='Уже зарегистрированы?',
+          command=log_in, bd=3).grid(row=6, column=3, columnspan=2)
 
 win.mainloop()
