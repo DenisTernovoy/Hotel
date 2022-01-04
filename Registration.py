@@ -1,5 +1,7 @@
 import tkinter as tk
+from rooms import main_win
 
+rooms = []
 count = 0
 DICT = {
     'Guests': []
@@ -103,6 +105,7 @@ def accept_all():
                               foreground='black',
                               bg='green')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
+            main_win()
 
 def delete_all():
     name.delete(0, tk.END)
@@ -172,6 +175,5 @@ tk.Button(text='Принять',
 
 tk.Button(text='Очистить',
           command=delete_all, bd=3).grid(row=6, column=1, pady=20)
-
 
 win.mainloop()
