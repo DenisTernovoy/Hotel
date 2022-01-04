@@ -1,5 +1,6 @@
 import tkinter as tk
 from rooms import main_win
+from login import main_log
 
 rooms = []
 count = 0
@@ -95,7 +96,7 @@ def accept_all():
 
     if flag_name and flag_surname and flag_l_name and flag_series_passport and flag_numbers_passport:
         if f'{series_passport.get()}{numbers_passport.get()}' in DICT['Guests']:
-            result = tk.Label(text='Гость уже зарегестрирован!',
+            result = tk.Label(text='Гость уже зарегистрирован!',
                               foreground='black',
                               bg='red')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
@@ -121,6 +122,9 @@ def delete_all():
     except Exception:
         pass
 
+
+def log_in():
+    main_log()
 
 # конфигурация главного окна
 
@@ -179,6 +183,7 @@ tk.Button(text='Принять',
 tk.Button(text='Очистить',
           command=delete_all, bd=3).grid(row=6, column=1, pady=20)
 
-win.mainloop()
+tk.Button(text='Уже зарегистрированы?',
+          command=log_in, bd=3).grid(row=6, column=3, columnspan=2)
 
 win.mainloop()

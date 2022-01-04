@@ -38,6 +38,7 @@ def main_win():
     win_r.rowconfigure(4, minsize=50)
     win_r.rowconfigure(5, minsize=50)
     win_r.rowconfigure(6, minsize=50)
+    win_r.resizable(False, False)
 
     # кнопки номеров
 
