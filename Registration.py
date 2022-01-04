@@ -3,9 +3,6 @@ from rooms import main_win
 
 rooms = []
 count = 0
-DICT = {
-    'Guests': []
-}
 
 def accept_all():
     global wrong_name, wrong_surname, wrong_l_name, result, count, wrong_series_passport, wrong_numbers_passport
