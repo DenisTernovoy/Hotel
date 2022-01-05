@@ -103,19 +103,24 @@ def accept_all():
             result.grid(row=1, column=0, columnspan=6, stick='wens')
         else:
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'] = dict()
-            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Name'] = name.get()
-            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Surname'] = surname.get()
-            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Lastname'] = l_name.get()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Name'] = name.get().capitalize()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Surname'] = surname.get().capitalize()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Lastname'] = l_name.get().capitalize()
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)
                 print(j_dict)
 
-            result = tk.Label(text='Успешная регистрация!',
+            result = tk.Label(win, text='Успешная регистрация!',
                               foreground='black',
                               bg='green')
             result.grid(row=1, column=0, columnspan=6, stick='wens')
+
             main_win(f'{series_passport.get()}_{numbers_passport.get()}')
+
+
+
+
 
 
 def delete_all():

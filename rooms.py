@@ -25,9 +25,9 @@ def check_room(room):
 
 def main_win(a):
     global room_1, room_2, room_3, room_4, win_r, ID
+
     ID = a
     # конфигурация главного окна
-
     win_r = tk.Tk()
     win_r.geometry('350x400+500+200')
     win_r.title('Бронирование номера')
@@ -48,6 +48,10 @@ def main_win(a):
     win_r.rowconfigure(5, minsize=50)
     win_r.rowconfigure(6, minsize=50)
     win_r.resizable(False, False)
+    win_r.overrideredirect(1)
+    win_r.lift()
+    win_r.attributes('-topmost', True)
+    win_r.after_idle(win_r.attributes, '-topmost', True)
 
     # кнопки номеров
 
