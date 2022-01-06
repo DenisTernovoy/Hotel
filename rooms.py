@@ -17,7 +17,6 @@ def choice_room(btn, room):
     win_r.destroy()
 
 
-
 def check_room(room):
     room['state'] = tk.DISABLED
     room['bg'] = 'red'
