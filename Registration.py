@@ -120,10 +120,6 @@ def accept_all():
             main_win(f'{series_passport.get()}_{numbers_passport.get()}')
 
 
-
-
-
-
 def delete_all():
     name.delete(0, tk.END)
     surname.delete(0, tk.END)
@@ -152,6 +148,8 @@ win.columnconfigure(2, minsize=100)
 win.columnconfigure(3, minsize=100)
 win.columnconfigure(4, minsize=100)
 win.columnconfigure(5, minsize=100)
+win.columnconfigure(6, minsize=100)
+win.columnconfigure(7, minsize=100)
 
 win.rowconfigure(0, minsize=40)
 win.rowconfigure(1, minsize=40)
@@ -159,6 +157,8 @@ win.rowconfigure(2, minsize=40)
 win.rowconfigure(3, minsize=40)
 win.rowconfigure(4, minsize=40)
 win.rowconfigure(5, minsize=40)
+win.rowconfigure(6, minsize=40)
+win.rowconfigure(7, minsize=40)
 
 tk.Label(text="Гранд Отель",
          bg='#D0D5DE',
@@ -199,5 +199,8 @@ tk.Button(text='Очистить',
 
 tk.Button(text='Уже зарегистрированы?',
           command=log_in, bd=3).grid(row=6, column=3, columnspan=2)
+
+
+
 
 win.mainloop()

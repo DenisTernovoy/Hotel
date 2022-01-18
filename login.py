@@ -3,7 +3,8 @@ import json
 
 
 def check_guest():
-    global name, surname, lastname, no_guest, room, flag_series_passport, flag_numbers_passport, wrong_series_passport, wrong_numbers_passport
+    global name, surname, lastname, no_guest, room, flag_series_passport, flag_numbers_passport, \
+        wrong_series_passport, wrong_numbers_passport, breakfast
 
     flag_series_passport = False
     flag_numbers_passport = False
@@ -43,6 +44,12 @@ def check_guest():
     except Exception:
         pass
 
+    try:
+        breakfast.grid_forget()
+    except Exception:
+        pass
+
+
     if series_passport.get():
         if series_passport.get().isdigit():
             flag_series_passport = True
@@ -81,6 +88,14 @@ def check_guest():
                 lastname.grid(row=5, column=4, columnspan=2, stick='w')
                 room = tk.Label(win_log, text=f"Номер: {j_dict['Guests'][ID]['Room']} ")
                 room.grid(row=6, column=4, columnspan=2, stick='w')
+
+                if j_dict['Guests'][ID]['Breakfast'] == 1:
+                    breakfast = tk.Label(win_log, text="Завтраки: Включены")
+                    breakfast.grid(row=7, column=4, columnspan=2, stick='w')
+                else:
+                    breakfast = tk.Label(win_log, text="Завтраки: Не включены")
+                    breakfast.grid(row=7, column=4, columnspan=2, stick='w')
+
                 break
 
         if flag:

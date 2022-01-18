@@ -2,6 +2,7 @@ import tkinter as tk
 import json
 from photo import main_photo
 
+
 def choice_room(btn, room):
     btn['state'] = tk.DISABLED
     btn['bg'] = 'red'
@@ -14,8 +15,8 @@ def choice_room(btn, room):
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
 
-    main_photo()
     win_r.destroy()
+    main_photo(ID)
 
 
 def check_room(room):

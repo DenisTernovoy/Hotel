@@ -1,8 +1,10 @@
 import cv2
+from services import main_services, accept_services
 
 
-def main_photo():
-
+def main_photo(num):
+    global ID
+    ID = num
     cap = cv2.VideoCapture(0)
     filename = 'person.jpg'
 
@@ -15,7 +17,8 @@ def main_photo():
 
     cap.release()
     cv2.destroyAllWindows()
+    main_services(ID)
 
 
 if __name__ == '__main__':
-    main_photo()
+    main_photo('2')
