@@ -10,7 +10,8 @@ def choice_room(btn, room):
     with open('data.json', 'r') as json_file:
         j_dict = json.load(json_file)
 
-    j_dict['Guests'][ID]['Room'] = room
+    j_dict['Guests'][ID]['Room']['Number'] = room
+
 
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
@@ -111,7 +112,7 @@ def main_win(a):
         j_dict = json.load(json_file)
 
     for guest in j_dict['Guests']:
-        if j_dict['Guests'][guest].get("Room", None):
+        if j_dict['Guests'][guest]['Room'].get("Number", None):
             try:
                 DICT = {
                     '1': room_1,
@@ -140,7 +141,7 @@ def main_win(a):
                     '24': room_24,
                     '25': room_25,
                 }
-                check_room(DICT[str(j_dict['Guests'][guest]['Room'])])
+                check_room(DICT[str(j_dict['Guests'][guest]['Room']['Number'])])
             except Exception:
                 pass
 
@@ -148,4 +149,4 @@ def main_win(a):
 
 
 if __name__ == '__main__':
-    main_win()
+    main_win('1_1')

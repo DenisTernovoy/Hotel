@@ -3,7 +3,6 @@ from rooms import main_win
 from login import main_log
 import json
 
-
 count = 0
 
 
@@ -105,8 +104,11 @@ def accept_all():
         else:
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'] = dict()
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Name'] = name.get().capitalize()
-            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Surname'] = surname.get().capitalize()
-            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Lastname'] = l_name.get().capitalize()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'][
+                'Surname'] = surname.get().capitalize()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'][
+                'Lastname'] = l_name.get().capitalize()
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Room'] = {}
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)
@@ -135,6 +137,7 @@ def delete_all():
 
 def log_in():
     main_log()
+
 
 # конфигурация главного окна
 
@@ -165,7 +168,7 @@ tk.Label(text="Гранд Отель",
          font=("Arial", 20, 'bold')
          ).grid(row=0, column=0, columnspan=6, stick='wens')
 
-win.resizable(False, False)
+# win.resizable(False, False)
 
 # данные пользователя
 
@@ -185,9 +188,13 @@ tk.Label(text="Серия паспорта:").grid(row=3, column=3)
 series_passport = tk.Entry(width=8)
 series_passport.grid(row=3, column=4, stick='w', padx=12)
 
-tk.Label(text="Номер паспорта:").grid(row=4, column=3)
+tk.Label(text="Номер паспорта:").grid(row=4, column=3, stick='e')
 numbers_passport = tk.Entry(width=12)
 numbers_passport.grid(row=4, column=4)
+
+tk.Label(text="Дата выезда:").grid(row=5, column=3)
+stay_time = tk.Entry(width=12)
+stay_time.grid(row=5, column=4)
 
 # кнопки передачи данных
 
@@ -199,8 +206,5 @@ tk.Button(text='Очистить',
 
 tk.Button(text='Уже зарегистрированы?',
           command=log_in, bd=3).grid(row=6, column=3, columnspan=2)
-
-
-
 
 win.mainloop()

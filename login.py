@@ -49,7 +49,6 @@ def check_guest():
     except Exception:
         pass
 
-
     if series_passport.get():
         if series_passport.get().isdigit():
             flag_series_passport = True
@@ -79,22 +78,42 @@ def check_guest():
         flag = True
         for ID in j_dict['Guests']:
             if f'{series}_{numbers}' == ID:
+
+                find['state'] = tk.DISABLED
                 flag = False
+
                 name = tk.Label(win_log, text=f"Имя: {j_dict['Guests'][ID]['Name']} ")
                 name.grid(row=3, column=4, columnspan=2, stick='w')
+
                 surname = tk.Label(win_log, text=f"Фамилия: {j_dict['Guests'][ID]['Surname']} ")
                 surname.grid(row=4, column=4, columnspan=2, stick='w')
+
                 lastname = tk.Label(win_log, text=f"Отчество: {j_dict['Guests'][ID]['Lastname']} ")
                 lastname.grid(row=5, column=4, columnspan=2, stick='w')
-                room = tk.Label(win_log, text=f"Номер: {j_dict['Guests'][ID]['Room']} ")
+
+                room = tk.Label(win_log, text=f"Номер: {j_dict['Guests'][ID]['Room']['Number']} ")
                 room.grid(row=6, column=4, columnspan=2, stick='w')
 
-                if j_dict['Guests'][ID]['Breakfast'] == 1:
-                    breakfast = tk.Label(win_log, text="Завтраки: Включены")
-                    breakfast.grid(row=7, column=4, columnspan=2, stick='w')
-                else:
-                    breakfast = tk.Label(win_log, text="Завтраки: Не включены")
-                    breakfast.grid(row=7, column=4, columnspan=2, stick='w')
+                services = tk.Label(win_log, text="Услуги:",
+                                    font=('Arial', 16, 'bold'))
+                services.grid(row=8, column=1, columnspan=2, stick='w')
+
+                count_row = 9
+                count_сol = 1
+
+                for i in j_dict['Guests'][ID]['Services']:
+                    i = tk.Label(master=win_log, text=f"{i}: {j_dict['Guests'][ID]['Services'][i]} ")
+                    i.grid(row=count_row, column=count_сol, columnspan=2, stick='w')
+                    count_row += 1
+                    if count_row == 13:
+                        count_сol = 3
+                        count_row = 9
+
+                img = tk.PhotoImage(master=win_log, file=f'{series}_{numbers}.png')
+                pers = tk.Label(win_log)
+                pers.image = img
+                pers['image'] = pers.image
+                pers.grid(row=3, column=6, rowspan=10, columnspan=6)
 
                 break
 
@@ -104,22 +123,25 @@ def check_guest():
 
 
 def main_log():
-    global series_passport, numbers_passport, win_log
+    global series_passport, numbers_passport, win_log, find
 
     # конфигурация главного окна
 
     win_log = tk.Tk()
 
     win_log.title('Карточка клиента')
-    win_log.geometry("600x400+400+150")
-    win_log.columnconfigure(0, minsize=70)
-    win_log.columnconfigure(1, minsize=70)
-    win_log.columnconfigure(2, minsize=70)
-    win_log.columnconfigure(3, minsize=70)
-    win_log.columnconfigure(4, minsize=70)
-    win_log.columnconfigure(5, minsize=70)
-    win_log.columnconfigure(6, minsize=70)
-    win_log.columnconfigure(7, minsize=70)
+    win_log.geometry("915x600+200+70")
+    win_log.columnconfigure(0, minsize=80)
+    win_log.columnconfigure(1, minsize=80)
+    win_log.columnconfigure(2, minsize=80)
+    win_log.columnconfigure(3, minsize=80)
+    win_log.columnconfigure(4, minsize=80)
+    win_log.columnconfigure(5, minsize=80)
+    win_log.columnconfigure(6, minsize=80)
+    win_log.columnconfigure(7, minsize=80)
+    win_log.columnconfigure(8, minsize=80)
+    win_log.columnconfigure(9, minsize=80)
+    win_log.columnconfigure(10, minsize=80)
 
     win_log.rowconfigure(0, minsize=40)
     win_log.rowconfigure(1, minsize=40)
@@ -129,13 +151,21 @@ def main_log():
     win_log.rowconfigure(5, minsize=40)
     win_log.rowconfigure(6, minsize=40)
     win_log.rowconfigure(7, minsize=40)
+    win_log.rowconfigure(8, minsize=40)
+    win_log.rowconfigure(9, minsize=40)
+    win_log.rowconfigure(10, minsize=40)
+    win_log.rowconfigure(11, minsize=40)
+    win_log.rowconfigure(12, minsize=40)
+    win_log.rowconfigure(13, minsize=40)
+    win_log.rowconfigure(14, minsize=40)
+    win_log.rowconfigure(15, minsize=40)
 
-    win_log.resizable(False, False)
+    # win_log.resizable(False, False)
 
     tk.Label(win_log, text="Данные клиента",
              bg='#D0D5DE',
              font=("Arial", 20, 'bold')
-             ).grid(row=0, column=0, columnspan=8, rowspan=2, stick='wens')
+             ).grid(row=0, column=0, columnspan=11, rowspan=2, stick='wens')
 
     # данные пользователя
 
@@ -149,10 +179,11 @@ def main_log():
 
     # кнопки
 
-    tk.Button(win_log, text='Найти', bd=3,
-              command=check_guest).grid(row=5, column=1, columnspan=2, stick='we')
+    find = tk.Button(win_log, text='Найти', bd=3, command=check_guest)
+    find.grid(row=5, column=1, columnspan=2, stick='we')
 
     win_log.mainloop()
+
 
 if __name__ == '__main__':
     main_log()
