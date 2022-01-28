@@ -1,5 +1,6 @@
 import tkinter as tk
 import json
+from summary import main_summary
 
 
 def check_guest():
@@ -94,26 +95,37 @@ def check_guest():
                 room = tk.Label(win_log, text=f"Номер: {j_dict['Guests'][ID]['Room']['Number']} ")
                 room.grid(row=6, column=4, columnspan=2, stick='w')
 
+                date_arrival = tk.Label(win_log, text=f"Дата заезда: {j_dict['Guests'][ID]['Arrival']} ")
+                date_arrival.grid(row=7, column=4, columnspan=2, stick='w')
+
+                date_departure = tk.Label(win_log, text=f"Дата выезда: {j_dict['Guests'][ID]['Departure']['Date']} "
+                                                        f"{j_dict['Guests'][ID]['Departure']['Time']}")
+                date_departure.grid(row=8, column=4, columnspan=2, stick='w')
+
                 services = tk.Label(win_log, text="Услуги:",
                                     font=('Arial', 16, 'bold'))
-                services.grid(row=8, column=1, columnspan=2, stick='w')
+                services.grid(row=9, column=1, columnspan=2, stick='w')
 
-                count_row = 9
+                count_row = 10
                 count_сol = 1
 
                 for i in j_dict['Guests'][ID]['Services']:
                     i = tk.Label(master=win_log, text=f"{i}: {j_dict['Guests'][ID]['Services'][i]} ")
                     i.grid(row=count_row, column=count_сol, columnspan=2, stick='w')
                     count_row += 1
-                    if count_row == 13:
+                    if count_row == 16:
                         count_сol = 3
-                        count_row = 9
+                        count_row = 10
 
                 img = tk.PhotoImage(master=win_log, file=f'{series}_{numbers}.png')
                 pers = tk.Label(win_log)
                 pers.image = img
                 pers['image'] = pers.image
                 pers.grid(row=3, column=6, rowspan=10, columnspan=6)
+
+                total = tk.Label(win_log, text=f"Total: {main_summary(f'{series}_{numbers}')} руб.",
+                                    font=('Arial', 16, 'bold'))
+                total.grid(row=17, column=1, columnspan=2, stick='w')
 
                 break
 
@@ -129,8 +141,8 @@ def main_log():
 
     win_log = tk.Tk()
 
-    win_log.title('Карточка клиента')
-    win_log.geometry("915x600+200+70")
+    win_log.title('Карточка гостя')
+    win_log.geometry("915x900+480+70")
     win_log.columnconfigure(0, minsize=80)
     win_log.columnconfigure(1, minsize=80)
     win_log.columnconfigure(2, minsize=80)
@@ -159,10 +171,18 @@ def main_log():
     win_log.rowconfigure(13, minsize=40)
     win_log.rowconfigure(14, minsize=40)
     win_log.rowconfigure(15, minsize=40)
+    win_log.rowconfigure(16, minsize=40)
+    win_log.rowconfigure(17, minsize=40)
+    win_log.rowconfigure(18, minsize=40)
+    win_log.rowconfigure(19, minsize=40)
+    win_log.rowconfigure(20, minsize=40)
+    win_log.rowconfigure(21, minsize=40)
+
+
 
     # win_log.resizable(False, False)
 
-    tk.Label(win_log, text="Данные клиента",
+    tk.Label(win_log, text="Данные гостя",
              bg='#D0D5DE',
              font=("Arial", 20, 'bold')
              ).grid(row=0, column=0, columnspan=11, rowspan=2, stick='wens')

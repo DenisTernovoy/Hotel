@@ -11,7 +11,8 @@ def choice_room(btn, room):
         j_dict = json.load(json_file)
 
     j_dict['Guests'][ID]['Room']['Number'] = room
-
+    j_dict['Guests'][ID]['Summary'] = {}
+    j_dict['Guests'][ID]['Summary']['Number'] = 3000 * int(j_dict['Guests'][ID]['Stay'])
 
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
@@ -29,7 +30,9 @@ def main_win(a):
     global room_1, room_2, room_3, room_4, win_r, ID
 
     ID = a
+
     # конфигурация главного окна
+
     win_r = tk.Tk()
     win_r.geometry('350x400+500+200')
     win_r.title('Бронирование номера')
