@@ -11,8 +11,8 @@ def accept_services():
         j_dict['Guests'][ID]['Services'] = {}
         j_dict['Guests'][ID]['Services']['Breakfast'] = breakfast.get()
         j_dict['Guests'][ID]['Services']['Parking'] = parking.get()
-        j_dict['Guests'][ID]['Services']['Add_bed'] = add_bed.get()
-        j_dict['Guests'][ID]['Services']['Add_clean'] = add_clean.get()
+        j_dict['Guests'][ID]['Services']['Extra_bed'] = add_bed.get()
+        j_dict['Guests'][ID]['Services']['Room_clean'] = add_clean.get()
         j_dict['Guests'][ID]['Services']['Chem_clean'] = chem_clean.get()
         j_dict['Guests'][ID]['Services']['Teeth_kit'] = teeth_kit.get()
         j_dict['Guests'][ID]['Services']['Sew_kit'] = sew_kit.get()
@@ -20,6 +20,7 @@ def accept_services():
         j_dict['Guests'][ID]['Services']['Early_arrival'] = early_arrival.get()
         j_dict['Guests'][ID]['Services']['Late_departure'] = late_departure.get()
         j_dict['Guests'][ID]['Services']['Night_arrival'] = night_arrival.get()
+        j_dict['Guests'][ID]['Changes'] = []
 
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
@@ -82,7 +83,7 @@ def accept_services():
                 else:
                     j_dict['Guests'][ID]['Summary'][f'{option}'] = int(day_temp.get()) * int(
                         breakfast_temp.get()) * 1000
-                    j_dict['Guests'][ID]['Services'][f'{option}'] = f'{breakfast_temp.get()} ч. x {day_temp.get()} д.'
+                    j_dict['Guests'][ID]['Services'][f'{option}'] = int(breakfast_temp.get()) * int(day_temp.get())
 
                     with open('data.json', 'w') as json_file:
                         json.dump(j_dict, json_file, indent=4)
@@ -110,7 +111,7 @@ def accept_services():
         day_temp = tk.Entry(temp, width=5)
         day_temp.grid(row=1, column=2)
 
-        tk.Button(temp, text='OK', command=lambda:temp_accept_2(option)).grid(row=0, column=3, columnspan=2, rowspan=2)
+        tk.Button(temp, text='OK', command=lambda: temp_accept_2(option)).grid(row=0, column=3, columnspan=2, rowspan=2)
 
     if breakfast.get() == 1:
         temp_accept('Breakfast')
@@ -138,7 +139,7 @@ def main_services(num):
 
     win = tk.Tk()
     win.title('Дополнительные услуги')
-    win.geometry("480x480+450+150")
+    win.geometry("480x480+750+150")
 
     win.columnconfigure(0, minsize=60)
     win.columnconfigure(1, minsize=60)

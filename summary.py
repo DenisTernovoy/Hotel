@@ -7,10 +7,14 @@ def main_summary(num):
     with open("data.json", 'r') as json_file:
         j_dict = json.load(json_file)
 
-        if j_dict['Guests'][ID]['Services']['Add_bed'] == 1:
-            j_dict['Guests'][ID]['Summary']['Add_bed'] = 500
-        if j_dict['Guests'][ID]['Services']['Add_clean'] == 1:
-            j_dict['Guests'][ID]['Summary']['Add_clean'] = 0
+        if j_dict['Guests'][ID]['Services']['Breakfast'] != 0:
+            j_dict['Guests'][ID]['Summary']['Breakfast'] = j_dict['Guests'][ID]['Services']['Breakfast'] * 1000
+        if j_dict['Guests'][ID]['Services']['Parking'] != 0:
+            j_dict['Guests'][ID]['Summary']['Parking'] = j_dict['Guests'][ID]['Services']['Parking'] * 1000
+        if j_dict['Guests'][ID]['Services']['Extra_bed'] == 1:
+            j_dict['Guests'][ID]['Summary']['Extra_bed'] = 500
+        if j_dict['Guests'][ID]['Services']['Room_clean'] != 0:
+            j_dict['Guests'][ID]['Summary']['Room_clean'] = j_dict['Guests'][ID]['Services']['Room_clean'] * 300
         if j_dict['Guests'][ID]['Services']['Chem_clean'] != 0:
             j_dict['Guests'][ID]['Summary']['Chem_clean'] = j_dict['Guests'][ID]['Services']['Chem_clean'] * 2000
         if j_dict['Guests'][ID]['Services']['Teeth_kit'] != 0:

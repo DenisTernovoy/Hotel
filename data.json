@@ -1,73 +1,60 @@
 {
     "Guests": {
         "1_1": {
-            "Name": "\u0414\u0435\u043d\u0438\u0441",
-            "Surname": "\u0422\u0435\u0440\u043d\u043e\u0432\u043e\u0439",
-            "Lastname": "\u0415\u0432\u0433\u0435\u043d\u044c\u0435\u0432\u0438\u0447",
+            "Name": "Dsfgdfg",
+            "Surname": "Gfhfdggfd",
+            "Lastname": "Dfgfdg",
             "Room": {
-                "Number": 5
+                "Number": 20
             },
-            "Arrival": "28.01.2022 18:49",
+            "Arrival": "29.01.2022 00:24",
             "Departure": {
-                "Date": "30.01.2022",
+                "Date": "29.01.2022",
                 "Time": "18:00"
             },
-            "Stay": "2",
+            "Stay": "0",
             "Summary": {
-                "Number": 6000,
-                "Breakfast": 2000,
-                "Parking": 2000,
-                "Add_bed": 500,
-                "Chem_clean": 2000,
-                "Teeth_kit": 100,
-                "Late_departure": 1500
+                "Number": 0,
+                "Night_arrival": 3000,
+                "Late_departure": 1500,
+                "Extra_bed": 500
             },
             "Services": {
-                "Breakfast": "1 \u0447. x 2 \u0434.",
-                "Parking": "1 \u0447. x 2 \u0434.",
-                "Add_bed": 1,
-                "Add_clean": 0,
-                "Chem_clean": 1,
-                "Teeth_kit": 1,
+                "Breakfast": 0,
+                "Parking": 0,
+                "Extra_bed": 1,
+                "Room_clean": 0,
+                "Chem_clean": 0,
+                "Teeth_kit": 0,
                 "Sew_kit": 0,
                 "Room_upgrade": 0,
                 "Early_arrival": 0,
                 "Late_departure": 1,
-                "Night_arrival": 0
-            }
-        },
-        "2_2": {
-            "Name": "A",
-            "Surname": "Aa",
-            "Lastname": "Aaa",
-            "Room": {
-                "Number": 13
+                "Night_arrival": 1
             },
-            "Arrival": "28.01.2022 18:58",
-            "Departure": {
-                "Date": "01.02.2022",
-                "Time": "12:00"
-            },
-            "Stay": "4",
-            "Summary": {
-                "Number": 12000,
-                "Breakfast": 1000,
-                "Add_clean": 0,
-                "Teeth_kit": 100
-            },
-            "Services": {
-                "Breakfast": "1 \u0447. x 1 \u0434.",
-                "Parking": 0,
-                "Add_bed": 0,
-                "Add_clean": 1,
-                "Chem_clean": 0,
-                "Teeth_kit": 1,
-                "Sew_kit": 0,
-                "Room_upgrade": 0,
-                "Early_arrival": 0,
-                "Late_departure": 0,
-                "Night_arrival": 0
-            }
+            "Changes": [
+                {
+                    "Breakfast": 0,
+                    "Parking": 0,
+                    "Extra_bed": 0,
+                    "Room_clean": 0,
+                    "Chem_clean": 0,
+                    "Teeth_kit": 0,
+                    "Sew_kit": 0,
+                    "Late_departure": 1500,
+                    "Total": 1500
+                },
+                {
+                    "Breakfast": 0,
+                    "Parking": 0,
+                    "Extra_bed": 500,
+                    "Room_clean": 0,
+                    "Chem_clean": 0,
+                    "Teeth_kit": 0,
+                    "Sew_kit": 0,
+                    "Total": 500
+                }
+            ]
         }
     }
 }
