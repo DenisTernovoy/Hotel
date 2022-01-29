@@ -109,7 +109,12 @@ def accept_all():
                 wrong_stay_time.grid(row=5, column=4, stick='e')
             else:
                 delta_days = date_departure - dt.date.today()
-                if delta_days.days <= 0:
+
+                if delta_days.days < 0:
+                    wrong_stay_time = tk.Label(text='*',
+                                               foreground='red')
+                    wrong_stay_time.grid(row=5, column=4, stick='e')
+                elif delta_days.days == 0 and dt.datetime.now().time() > dt.time(5, 00, 00):
                     wrong_stay_time = tk.Label(text='*',
                                                foreground='red')
                     wrong_stay_time.grid(row=5, column=4, stick='e')
@@ -147,6 +152,7 @@ def accept_all():
                 f'{date_departure.strftime("%d.%m.%Y")}'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Departure']['Time'] = '12:00'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Stay'] = f'{delta_days.days}'
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Alerts'] = []
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)

@@ -1,6 +1,14 @@
 import tkinter as tk
 import json
 from summary import main_summary
+from changes import main_change
+
+
+def changes(num):
+    win_log.destroy()
+    ID = num
+    main_change(ID)
+
 
 
 def check_guest():
@@ -121,11 +129,25 @@ def check_guest():
                 pers = tk.Label(win_log)
                 pers.image = img
                 pers['image'] = pers.image
-                pers.grid(row=3, column=6, rowspan=10, columnspan=6)
+                pers.grid(row=3, column=6, rowspan=10, columnspan=6, stick='w')
 
-                total = tk.Label(win_log, text=f"Total: {main_summary(f'{series}_{numbers}')} руб.",
+                total = tk.Label(win_log, text=f"Итого: {main_summary(f'{series}_{numbers}')} руб.",
                                     font=('Arial', 16, 'bold'))
                 total.grid(row=17, column=1, columnspan=2, stick='w')
+
+                if j_dict['Guests'][ID]['Alerts']:
+                    tk.Label(win_log, text="Переезд:",
+                             font=('Arial', 16, 'bold')).grid(row=18, column=1, columnspan=8, stick='w')
+                    row = 19
+                    for i in j_dict['Guests'][ID]['Alerts']:
+                        tk.Label(win_log, text=f"{i}").grid(row=row, column=1, columnspan=8, stick='w')
+                        row += 1
+
+                change = tk.Button(win_log, text='Внести изменения', bd=3,
+                                   command=lambda: changes(f'{series}_{numbers}'))
+                change.grid(row=14, column=6, columnspan=5, stick='wens')
+
+
 
                 break
 
@@ -148,12 +170,15 @@ def main_log():
     win_log.columnconfigure(2, minsize=80)
     win_log.columnconfigure(3, minsize=80)
     win_log.columnconfigure(4, minsize=80)
-    win_log.columnconfigure(5, minsize=80)
+    win_log.columnconfigure(5, minsize=100)
     win_log.columnconfigure(6, minsize=80)
-    win_log.columnconfigure(7, minsize=80)
-    win_log.columnconfigure(8, minsize=80)
-    win_log.columnconfigure(9, minsize=80)
-    win_log.columnconfigure(10, minsize=80)
+    win_log.columnconfigure(7, minsize=60)
+    win_log.columnconfigure(8, minsize=60)
+    win_log.columnconfigure(9, minsize=60)
+    win_log.columnconfigure(10, minsize=60)
+    win_log.columnconfigure(11, minsize=60)
+    win_log.columnconfigure(12, minsize=60)
+    win_log.columnconfigure(13, minsize=60)
 
     win_log.rowconfigure(0, minsize=40)
     win_log.rowconfigure(1, minsize=40)
@@ -178,14 +203,12 @@ def main_log():
     win_log.rowconfigure(20, minsize=40)
     win_log.rowconfigure(21, minsize=40)
 
-
-
-    # win_log.resizable(False, False)
+    win_log.resizable(False, False)
 
     tk.Label(win_log, text="Данные гостя",
              bg='#D0D5DE',
              font=("Arial", 20, 'bold')
-             ).grid(row=0, column=0, columnspan=11, rowspan=2, stick='wens')
+             ).grid(row=0, column=0, columnspan=12, rowspan=2, stick='wens')
 
     # данные пользователя
 
