@@ -1,5 +1,6 @@
 import tkinter as tk
 import json
+from change_room import change_room_main
 
 
 def accept_all(num):
@@ -220,10 +221,8 @@ def change_services(num):
 def change_room(num):
     ID = num
     win_change.destroy()
-    # конфигурация главного окна
+    change_room_main(ID)
 
-    wcr = tk.Tk()
-    wcr.mainloop()
 
 
 def main_change(num):

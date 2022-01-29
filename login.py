@@ -131,13 +131,23 @@ def check_guest():
                 pers['image'] = pers.image
                 pers.grid(row=3, column=6, rowspan=10, columnspan=6, stick='w')
 
-                total = tk.Label(win_log, text=f"Total: {main_summary(f'{series}_{numbers}')} руб.",
+                total = tk.Label(win_log, text=f"Итого: {main_summary(f'{series}_{numbers}')} руб.",
                                     font=('Arial', 16, 'bold'))
                 total.grid(row=17, column=1, columnspan=2, stick='w')
+
+                if j_dict['Guests'][ID]['Alerts']:
+                    tk.Label(win_log, text="Переезд:",
+                             font=('Arial', 16, 'bold')).grid(row=18, column=1, columnspan=8, stick='w')
+                    row = 19
+                    for i in j_dict['Guests'][ID]['Alerts']:
+                        tk.Label(win_log, text=f"{i}").grid(row=row, column=1, columnspan=8, stick='w')
+                        row += 1
 
                 change = tk.Button(win_log, text='Внести изменения', bd=3,
                                    command=lambda: changes(f'{series}_{numbers}'))
                 change.grid(row=14, column=6, columnspan=5, stick='wens')
+
+
 
                 break
 

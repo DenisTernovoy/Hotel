@@ -152,6 +152,7 @@ def accept_all():
                 f'{date_departure.strftime("%d.%m.%Y")}'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Departure']['Time'] = '12:00'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Stay'] = f'{delta_days.days}'
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Alerts'] = []
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)

@@ -1,5 +1,6 @@
 import tkinter as tk
 import json
+import datetime as dt
 
 
 def main_summary(num):
@@ -27,13 +28,24 @@ def main_summary(num):
             j_dict['Guests'][ID]['Summary']['Late_departure'] = 1500
         if j_dict['Guests'][ID]['Services']['Night_arrival'] == 1:
             j_dict['Guests'][ID]['Summary']['Night_arrival'] = 3000
-
-    with open('data.json', 'w') as json_file:
-        json.dump(j_dict, json_file, indent=4)
+        if j_dict['Guests'][ID]['Services']['Room_upgrade'] == 1:
+            date_now = dt.date.today()
+            day = int(j_dict['Guests'][ID]['Departure']['Date'][:2])
+            month = int(j_dict['Guests'][ID]['Departure']['Date'][3:5])
+            year = int(j_dict['Guests'][ID]['Departure']['Date'][6:10])
+            date_departure = dt.date(year, month, day)
+            day_stay = date_departure - date_now
+            stay = int(day_stay.days)
+            if dt.time(0, 00, 00) < dt.datetime.now().time() < dt.time(5, 00, 00):
+                stay += 1
+            j_dict['Guests'][ID]['Summary']['Room_upgrade'] = stay * 1500
 
         total = 0
         for i in j_dict['Guests'][ID]['Summary']:
             total += j_dict['Guests'][ID]['Summary'][i]
+
+        with open('data.json', 'w') as json_file:
+            json.dump(j_dict, json_file, indent=4)
 
         return total
 
