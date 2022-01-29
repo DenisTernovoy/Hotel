@@ -132,10 +132,7 @@ def change_room_main(num):
     win_r.rowconfigure(5, minsize=50)
     win_r.rowconfigure(6, minsize=50)
     win_r.resizable(False, False)
-    win_r.overrideredirect(1)
-    win_r.lift()
-    win_r.attributes('-topmost', True)
-    win_r.after_idle(win_r.attributes, '-topmost', True)
+
 
     # кнопки номеров
 
