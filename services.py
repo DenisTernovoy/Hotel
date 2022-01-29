@@ -1,6 +1,6 @@
 import tkinter as tk
 import json
-import time
+import datetime
 
 
 def accept_services():
@@ -67,8 +67,7 @@ def accept_services():
                 with open("data.json", 'r') as json_file:
                     j_dict = json.load(json_file)
 
-                if (j_dict['Guests'][ID]['Services']['Early_arrival'] == 1 or
-                    j_dict['Guests'][ID]['Services']['Night_arrival'] == 1) and \
+                if (early_arrival.get() == 1 or j_dict['Guests'][ID]['Services']['Night_arrival'] == 1) and \
                         int(day_temp.get()) > int(j_dict['Guests'][ID]['Stay']) + 1:
                     wrong_day = tk.Label(temp, text='*',
                                          foreground='red')
@@ -79,7 +78,11 @@ def accept_services():
                     wrong_day = tk.Label(temp, text='*',
                                          foreground='red')
                     wrong_day.grid(row=1, column=3, stick='e')
-
+                elif early_arrival.get() == 1 and datetime.datetime.now().time() > datetime.time(11, 00, 00) and \
+                    int(day_temp.get()) > int(j_dict['Guests'][ID]['Stay']):
+                    wrong_day = tk.Label(temp, text='*',
+                                         foreground='red')
+                    wrong_day.grid(row=1, column=3, stick='e')
                 else:
                     j_dict['Guests'][ID]['Summary'][f'{option}'] = int(day_temp.get()) * int(
                         breakfast_temp.get()) * 1000
@@ -194,12 +197,16 @@ def main_services(num):
     tk.Checkbutton(win, text='Апгрейд номера', variable=room_upgrade).grid(row=2, column=5, columnspan=2, stick='w')
 
     early_arrival = tk.IntVar(win)
+    if datetime.time(5, 00, 00) < datetime.datetime.now().time() < datetime.time(15, 00, 00):
+        early_arrival.set(1)
     tk.Checkbutton(win, text='Ранний заезд', variable=early_arrival).grid(row=3, column=5, columnspan=2, stick='w')
 
     late_departure = tk.IntVar(win)
     tk.Checkbutton(win, text='Поздний выезд', variable=late_departure).grid(row=4, column=5, columnspan=2, stick='w')
 
     night_arrival = tk.IntVar(win)
+    if datetime.time(0, 00, 00) < datetime.datetime.now().time() < datetime.time(5, 00, 00):
+        night_arrival.set(1)
     tk.Checkbutton(win, text='Ночной заезд', variable=night_arrival).grid(row=5, column=5, columnspan=2, stick='w')
 
     # кнопка принятия данных

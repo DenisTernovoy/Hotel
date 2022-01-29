@@ -109,7 +109,12 @@ def accept_all():
                 wrong_stay_time.grid(row=5, column=4, stick='e')
             else:
                 delta_days = date_departure - dt.date.today()
+
                 if delta_days.days < 0:
+                    wrong_stay_time = tk.Label(text='*',
+                                               foreground='red')
+                    wrong_stay_time.grid(row=5, column=4, stick='e')
+                elif delta_days.days == 0 and dt.datetime.now().time() > dt.time(5, 00, 00):
                     wrong_stay_time = tk.Label(text='*',
                                                foreground='red')
                     wrong_stay_time.grid(row=5, column=4, stick='e')
