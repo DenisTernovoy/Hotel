@@ -1,6 +1,5 @@
 import tkinter as tk
 from rooms import main_win
-from login import main_log
 import json
 import datetime as dt
 
@@ -61,7 +60,7 @@ def accept_all():
         if name.get().isalpha():
             flag_name = True
         else:
-            wrong_name = tk.Label(text='*',
+            wrong_name = tk.Label(win, text='*',
                                   foreground='red')
             wrong_name.grid(row=3, column=2, columnspan=2, stick='w')
 
@@ -69,7 +68,7 @@ def accept_all():
         if surname.get().isalpha():
             flag_surname = True
         else:
-            wrong_surname = tk.Label(text='*',
+            wrong_surname = tk.Label(win, text='*',
                                      foreground='red')
             wrong_surname.grid(row=4, column=2, columnspan=2, stick='w')
 
@@ -77,7 +76,7 @@ def accept_all():
         if l_name.get().isalpha():
             flag_l_name = True
         else:
-            wrong_l_name = tk.Label(text='*',
+            wrong_l_name = tk.Label(win, text='*',
                                     foreground='red')
             wrong_l_name.grid(row=5, column=2, columnspan=2, stick='w')
 
@@ -85,7 +84,7 @@ def accept_all():
         if series_passport.get().isdigit():
             flag_series_passport = True
         else:
-            wrong_series_passport = tk.Label(text='*',
+            wrong_series_passport = tk.Label(win, text='*',
                                              foreground='red')
             wrong_series_passport.grid(row=3, column=4, stick='e')
 
@@ -93,7 +92,7 @@ def accept_all():
         if numbers_passport.get().isdigit():
             flag_numbers_passport = True
         else:
-            wrong_numbers_passport = tk.Label(text='*',
+            wrong_numbers_passport = tk.Label(win, text='*',
                                               foreground='red')
             wrong_numbers_passport.grid(row=4, column=4, stick='e')
 
@@ -104,24 +103,24 @@ def accept_all():
             try:
                 date_departure = dt.date(year=int(arrange[2]), month=int(arrange[1]), day=int(arrange[0]))
             except ValueError:
-                wrong_stay_time = tk.Label(text='*',
+                wrong_stay_time = tk.Label(win, text='*',
                                            foreground='red')
                 wrong_stay_time.grid(row=5, column=4, stick='e')
             else:
                 delta_days = date_departure - dt.date.today()
 
                 if delta_days.days < 0:
-                    wrong_stay_time = tk.Label(text='*',
+                    wrong_stay_time = tk.Label(win, text='*',
                                                foreground='red')
                     wrong_stay_time.grid(row=5, column=4, stick='e')
                 elif delta_days.days == 0 and dt.datetime.now().time() > dt.time(5, 00, 00):
-                    wrong_stay_time = tk.Label(text='*',
+                    wrong_stay_time = tk.Label(win, text='*',
                                                foreground='red')
                     wrong_stay_time.grid(row=5, column=4, stick='e')
                 else:
                     flag_stay_time = True
         else:
-            wrong_stay_time = tk.Label(text='*',
+            wrong_stay_time = tk.Label(win, text='*',
                                               foreground='red')
             wrong_stay_time.grid(row=5, column=4, stick='e')
 
@@ -133,10 +132,10 @@ def accept_all():
             j_dict = json.load(json_file)
 
         if f'{series_passport.get()}_{numbers_passport.get()}' in j_dict['Guests']:
-            result = tk.Label(text='Гость уже зарегестрирован!',
+            result = tk.Label(win, text='Гость уже зарегестрирован!',
                               foreground='black',
                               bg='red')
-            result.grid(row=1, column=0, columnspan=6, stick='wens')
+            result.grid(row=2, column=0, columnspan=6, stick='wens')
         else:
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}'] = dict()
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Name'] = name.get().capitalize()
@@ -156,12 +155,11 @@ def accept_all():
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)
-                print(j_dict)
 
             result = tk.Label(win, text='Успешная регистрация!',
                               foreground='black',
                               bg='green')
-            result.grid(row=1, column=0, columnspan=6, stick='wens')
+            result.grid(row=2, column=0, columnspan=6, stick='wens')
 
             main_win(f'{series_passport.get()}_{numbers_passport.get()}')
 
@@ -210,50 +208,47 @@ def main():
     win.rowconfigure(6, minsize=40)
     win.rowconfigure(7, minsize=40)
 
-    tk.Label(text="Гранд Отель",
+    tk.Label(win, text="Отель Гранд",
              bg='#D0D5DE',
              font=("Arial", 20, 'bold')
-             ).grid(row=0, column=0, columnspan=6, stick='wens')
+             ).grid(row=0, column=0, columnspan=6, rowspan=2, stick='wens')
 
-    # win.resizable(False, False)
+    win.resizable(False, False)
 
     # данные пользователя
 
-    tk.Label(text="Имя:").grid(row=3, column=0)
-    name = tk.Entry()
+    tk.Label(win, text="Имя:").grid(row=3, column=0)
+    name = tk.Entry(win)
     name.grid(row=3, column=1)
 
-    tk.Label(text="Фамилия:").grid(row=4, column=0)
-    surname = tk.Entry()
+    tk.Label(win, text="Фамилия:").grid(row=4, column=0)
+    surname = tk.Entry(win)
     surname.grid(row=4, column=1)
 
-    tk.Label(text="Отчество:").grid(row=5, column=0)
-    l_name = tk.Entry()
+    tk.Label(win, text="Отчество:").grid(row=5, column=0)
+    l_name = tk.Entry(win)
     l_name.grid(row=5, column=1)
 
-    tk.Label(text="Серия паспорта:").grid(row=3, column=3)
-    series_passport = tk.Entry(width=8)
+    tk.Label(win, text="Серия паспорта:").grid(row=3, column=3)
+    series_passport = tk.Entry(win, width=8)
     series_passport.grid(row=3, column=4, stick='w', padx=12)
 
-    tk.Label(text="Номер паспорта:").grid(row=4, column=3, stick='e')
-    numbers_passport = tk.Entry(width=12)
+    tk.Label(win, text="Номер паспорта:").grid(row=4, column=3, stick='e')
+    numbers_passport = tk.Entry(win, width=12)
     numbers_passport.grid(row=4, column=4)
 
-    tk.Label(text="Дата выезда:").grid(row=5, column=3)
-    stay_time = tk.Entry(width=12)
+    tk.Label(win, text="Дата выезда:").grid(row=5, column=3)
+    stay_time = tk.Entry(win, width=12)
     stay_time.grid(row=5, column=4)
 
 
     # кнопки передачи данных
 
-    tk.Button(text='Принять',
+    tk.Button(win, text='Принять',
               command=accept_all, bd=3).grid(row=6, column=0, stick='e')
 
-    tk.Button(text='Очистить',
+    tk.Button(win, text='Очистить',
               command=delete_all, bd=3).grid(row=6, column=1, pady=20)
-
-    tk.Button(text='Уже зарегистрированы?',
-              command=log_in, bd=3).grid(row=6, column=3, columnspan=2)
 
     win.mainloop()
 
