@@ -15,21 +15,21 @@ def accept(room_repair, num):
         j_dict['Guests'][ID]['Services']['Room_upgrade'] = 1
         j_dict['Guests'][ID]['Alerts'].\
             append(f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
-                   f' оплатил улучшение класса и переехал из комнаты {room} в комнату {new_room}')
+                   f' оплатил улучшение класса и переехал из номера {room} в номер {new_room}')
     if dirty.get():
         j_dict['Room_repair'][room].append('Комната грязная')
         j_dict['Guests'][ID]['Alerts'].append(f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
-                                              f' переехал из комнаты {room} в комнату {new_room} из-за грязи')
+                                              f' переехал из номера {room} в номер {new_room} из-за грязи')
     if need_repair.get():
         j_dict['Room_repair'][room].append('Неисправности')
         j_dict['Guests'][ID]['Alerts'].\
             append(f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
-                   f' переехал из комнаты {room} в комнату {new_room} из-за неисправностей')
+                   f' переехал из номера {room} в номер {new_room} из-за неисправностей')
     if other.get():
         j_dict['Room_repair'][room].append(other.get())
         j_dict['Guests'][ID]['Alerts'].append(
             f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
-            f' переехал из комнаты {room} в комнату {new_room} из-за: *{other.get()}')
+            f' переехал из номера {room} в номер {new_room} из-за: *{other.get()}')
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
 

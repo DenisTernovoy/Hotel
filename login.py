@@ -10,7 +10,6 @@ def changes(num):
     main_change(ID)
 
 
-
 def check_guest():
     global name, surname, lastname, no_guest, room, flag_series_passport, flag_numbers_passport, \
         wrong_series_passport, wrong_numbers_passport, breakfast
@@ -156,7 +155,7 @@ def check_guest():
             no_guest.grid(row=3, column=4, rowspan=3, columnspan=3)
 
 
-def main_log():
+def main_log(data=None):
     global series_passport, numbers_passport, win_log, find
 
     # конфигурация главного окна
@@ -225,7 +224,13 @@ def main_log():
     find = tk.Button(win_log, text='Найти', bd=3, command=check_guest)
     find.grid(row=5, column=1, columnspan=2, stick='we')
 
+    if data:
+        series_passport.insert(0, data.split('_')[0])
+        numbers_passport.insert(0, data.split('_')[1])
+        check_guest()
+
     win_log.mainloop()
+
 
 
 if __name__ == '__main__':
