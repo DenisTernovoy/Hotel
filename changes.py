@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 from change_room import change_room_main
+import datetime as dt
 
 
 def accept_all(num):
@@ -52,6 +53,7 @@ def accept_all(num):
         total += temp[i]
 
     temp['Total'] = total
+    temp['Date'] = f'{dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
 
     if total > 0:
         j_dict['Guests'][ID]['Changes'].append(temp)

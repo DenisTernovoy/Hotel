@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 import datetime
+from summary import main_summary
 
 
 def accept_services():
@@ -129,6 +130,15 @@ def accept_services():
 
         with open('data.json', 'w') as json_file:
             json.dump(j_dict, json_file, indent=4)
+
+    with open("data.json", 'r') as json_file:
+        j_dict = json.load(json_file)
+
+    j_dict['Guests'][ID]['Changes'].append(j_dict['Guests'][ID]['Services'])
+    j_dict['Guests'][ID]['Changes'][0]['Total'] = main_summary(ID)
+
+    with open('data.json', 'w') as json_file:
+        json.dump(j_dict, json_file, indent=4)
 
     win.destroy()
 
