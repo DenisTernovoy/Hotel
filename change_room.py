@@ -16,6 +16,22 @@ def accept(room_repair, num):
         j_dict['Guests'][ID]['Alerts'].\
             append(f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
                    f' оплатил улучшение класса и переехал из номера {room} в номер {new_room}')
+
+        temp_1 = {}
+        date_now = dt.date.today()
+        day = int(j_dict['Guests'][ID]['Departure']['Date'][:2])
+        month = int(j_dict['Guests'][ID]['Departure']['Date'][3:5])
+        year = int(j_dict['Guests'][ID]['Departure']['Date'][6:10])
+        date_departure = dt.date(year, month, day)
+        day_stay = date_departure - date_now
+        stay = int(day_stay.days)
+        if dt.time(0, 00, 00) < dt.datetime.now().time() < dt.time(5, 00, 00):
+            stay += 1
+        temp_1['Room_upgrade']= f'на {stay} ночи'
+        temp_1['Total'] = stay * 1500
+        temp_1['Date'] = f'{dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
+        j_dict['Guests'][ID]['Changes'].append(temp_1)
+
     if dirty.get():
         j_dict['Room_repair'][room].append('Комната грязная')
         j_dict['Guests'][ID]['Alerts'].append(f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
@@ -30,6 +46,8 @@ def accept(room_repair, num):
         j_dict['Guests'][ID]['Alerts'].append(
             f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
             f' переехал из номера {room} в номер {new_room} из-за: *{other.get()}')
+
+
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
 

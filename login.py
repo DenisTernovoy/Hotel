@@ -2,12 +2,18 @@ import tkinter as tk
 import json
 from summary import main_summary
 from changes import main_change
+from bills import main_bills
 
 
 def changes(num):
     win_log.destroy()
     ID = num
     main_change(ID)
+
+
+def bill(num):
+    ID = num
+    main_bills(ID)
 
 
 def check_guest():
@@ -146,6 +152,9 @@ def check_guest():
                                    command=lambda: changes(f'{series}_{numbers}'))
                 change.grid(row=14, column=6, columnspan=5, stick='wens')
 
+                bills = tk.Button(win_log, text='Чеки', bd=3,
+                                   command=lambda: bill(f'{series}_{numbers}'))
+                bills.grid(row=15, column=6, columnspan=5, stick='wens')
 
 
 
