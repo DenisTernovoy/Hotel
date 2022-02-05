@@ -1,8 +1,64 @@
+import time
 import tkinter as tk
 import json
 from summary import main_summary
 from changes import main_change
 from bills import main_bills
+from sharing import main_share
+
+
+def temp(num):
+    ID = num
+    win_log.destroy()
+    main_log(ID)
+
+
+def guests(collection):
+    guests_list = collection
+
+    def win(num):
+        ID = num
+        win_log.destroy()
+        temp_win.destroy()
+        main_log(ID)
+
+    temp_win = tk.Tk()
+    temp_win.title('Гости')
+    temp_win.geometry('320x280+750+350')
+
+    temp_win.rowconfigure(0, minsize=70)
+    temp_win.rowconfigure(1, minsize=70)
+    temp_win.rowconfigure(2, minsize=70)
+    temp_win.rowconfigure(3, minsize=70)
+
+    temp_win.columnconfigure(0, minsize=80)
+    temp_win.columnconfigure(1, minsize=80)
+    temp_win.columnconfigure(2, minsize=80)
+    temp_win.columnconfigure(3, minsize=80)
+
+    temp_win.resizable(False, False)
+
+    tk.Label(temp_win, text='Гости',
+             bg='#D0D5DE',
+             font=("Arial", 18, 'bold')).grid(row=0, column=0, columnspan=4, stick='wens')
+
+    with open('data.json', 'r') as json_file:
+        j_dict = json.load(json_file)
+
+    tk.Button(temp_win,
+              text=f"{j_dict['Guests'][guests_list[0]]['Name']} {j_dict['Guests'][guests_list[0]]['Surname']}",
+              bd=3,
+              command=lambda: win(guests_list[0]))\
+        .grid(row=1, column=0, columnspan=4, stick='wens')
+
+    if len(guests_list) == 2:
+        tk.Button(temp_win,
+                  text=f"{j_dict['Guests'][guests_list[1]]['Name']} {j_dict['Guests'][guests_list[1]]['Surname']}",
+                  bd=3,
+                  command=lambda: win(guests_list[1])) \
+            .grid(row=2, column=0, columnspan=4, stick='wens')
+
+    temp_win.mainloop()
 
 
 def changes(num):
@@ -115,6 +171,14 @@ def check_guest():
                                                         f"{j_dict['Guests'][ID]['Departure']['Time']}")
                 date_departure.grid(row=8, column=4, columnspan=2, stick='w')
 
+                if 'Share' in j_dict['Guests'][ID]:
+                    tk.Button(win_log, text='Гость у', command=lambda: temp(j_dict['Guests'][ID]['Share']))\
+                        .grid(row=9, column=4, columnspan=2, stick='wens')
+                elif j_dict['Guests'][ID]['Share_with']:
+                    tk.Button(win_log, text='Гости', command=lambda: guests(j_dict['Guests'][ID]['Share_with'])) \
+                        .grid(row=9, column=4, columnspan=2, stick='wens')
+
+
                 services = tk.Label(win_log, text="Услуги:",
                                     font=('Arial', 16, 'bold'))
                 services.grid(row=9, column=1, columnspan=2, stick='w')
@@ -156,8 +220,12 @@ def check_guest():
                                    command=lambda: bill(f'{series}_{numbers}'))
                 bills.grid(row=15, column=6, columnspan=5, stick='wens')
 
+                share = tk.Button(win_log, text='Подселить гостя', bd=3,
+                                  command=lambda: main_share(win_log, f'{series}_{numbers}'))
+                share.grid(row=16, column=6, columnspan=5, stick='wens')
 
-
+                if 'Share' in j_dict['Guests'][ID]:
+                    share['state'] = tk.DISABLED
                 break
 
         if flag:
@@ -242,6 +310,5 @@ def main_log(data=None):
     win_log.mainloop()
 
 
-
 if __name__ == '__main__':
-    main_log()
+    main_log('1_1')

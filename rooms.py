@@ -27,7 +27,7 @@ def check_room(room):
 
 
 def main_win(a):
-    global room_1, room_2, room_3, room_4, win_r, ID, DICT
+    global win_r, ID, DICT
 
     ID = a
 

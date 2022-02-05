@@ -74,6 +74,7 @@ def choice_room(room):
                 else:
                     if str(room) == str(j_dict["Guests"][guest]["Room"]["Number"]):
                         main_log(guest)
+                        break
 
 
 def room_state_func():

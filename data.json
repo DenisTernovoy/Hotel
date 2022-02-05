@@ -5,38 +5,36 @@
             "Surname": "\u0422\u0435\u0440\u043d\u043e\u0432\u043e\u0439",
             "Lastname": "\u0415\u0432\u0433\u0435\u043d\u044c\u0435\u0432\u0438\u0447",
             "Room": {
-                "Number": 10
+                "Number": 1
             },
-            "Arrival": "31.01.2022 14:21",
+            "Arrival": "01.02.2022 09:52",
             "Departure": {
-                "Date": "02.02.2022",
-                "Time": "18:00"
+                "Date": "03.02.2022",
+                "Time": "12:00"
             },
             "Stay": "2",
             "Alerts": [
-                "\u0413\u043e\u0441\u0442\u044c 31.01.2022 14:22 \u043e\u043f\u043b\u0430\u0442\u0438\u043b \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u043a\u043b\u0430\u0441\u0441\u0430 \u0438 \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0438\u0437 \u043d\u043e\u043c\u0435\u0440\u0430 5 \u0432 \u043d\u043e\u043c\u0435\u0440 10"
+                "\u0413\u043e\u0441\u0442\u044c 01.02.2022 13:50 \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0438\u0437 \u043d\u043e\u043c\u0435\u0440\u0430 5 \u0432 \u043d\u043e\u043c\u0435\u0440 1 \u0438\u0437-\u0437\u0430 \u0433\u0440\u044f\u0437\u0438",
+                "\u0413\u043e\u0441\u0442\u044c 01.02.2022 13:53 \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0438\u0437 \u043d\u043e\u043c\u0435\u0440\u0430 1 \u0432 \u043d\u043e\u043c\u0435\u0440 21 \u0438\u0437-\u0437\u0430 \u0433\u0440\u044f\u0437\u0438",
+                "\u0413\u043e\u0441\u0442\u044c 01.02.2022 13:54 \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0438\u0437 \u043d\u043e\u043c\u0435\u0440\u0430 21 \u0432 \u043d\u043e\u043c\u0435\u0440 1 \u0438\u0437-\u0437\u0430: *\u043f\u043e\u0440\u0443\u0433\u0430\u043b\u0438\u0441\u044c"
             ],
+            "Share_with": [],
             "Summary": {
                 "Number": 6000,
-                "Extra_bed": 500,
-                "Teeth_kit": 200,
-                "Early_arrival": 1500,
-                "Late_departure": 1500,
-                "Room_upgrade": 3000
+                "Early_arrival": 1500
             },
             "Services": {
                 "Breakfast": 0,
                 "Parking": 0,
-                "Extra_bed": 1,
+                "Extra_bed": 0,
                 "Room_clean": 0,
                 "Chem_clean": 0,
-                "Teeth_kit": 2,
+                "Teeth_kit": 0,
                 "Sew_kit": 0,
-                "Room_upgrade": 1,
+                "Room_upgrade": 0,
                 "Early_arrival": 1,
-                "Late_departure": 1,
-                "Night_arrival": 0,
-                "Total": 7600
+                "Late_departure": 0,
+                "Night_arrival": 0
             },
             "Changes": [
                 {
@@ -45,40 +43,42 @@
                     "Extra_bed": 0,
                     "Room_clean": 0,
                     "Chem_clean": 0,
-                    "Teeth_kit": 1,
+                    "Teeth_kit": 0,
                     "Sew_kit": 0,
                     "Room_upgrade": 0,
                     "Early_arrival": 1,
                     "Late_departure": 0,
                     "Night_arrival": 0,
-                    "Total": 7600
+                    "Total": 7500
                 },
                 {
                     "Breakfast": 0,
                     "Parking": 0,
-                    "Extra_bed": 500,
+                    "Extra_bed": 0,
                     "Room_clean": 0,
                     "Chem_clean": 0,
                     "Teeth_kit": 0,
                     "Sew_kit": 0,
                     "Late_departure": 1500,
-                    "Total": 2000,
-                    "Date": "31.01.2022 14:21"
+                    "Total": 1500,
+                    "Date": "01.02.2022 09:53"
                 },
                 {
                     "Breakfast": 0,
                     "Parking": 0,
+                    "Extra_bed": 0,
                     "Room_clean": 0,
                     "Chem_clean": 0,
-                    "Teeth_kit": 100,
+                    "Teeth_kit": 0,
                     "Sew_kit": 0,
-                    "Total": 100,
-                    "Date": "31.01.2022 14:21"
+                    "Late_departure": 1500,
+                    "Total": 1500,
+                    "Date": "01.02.2022 13:53"
                 },
                 {
-                    "Room_upgrade": "\u041d\u0430 2 \u043d\u043e\u0447\u0438",
-                    "Total": 3000,
-                    "Date": "31.01.2022 14:22"
+                    "Room_move": "\u043f\u0435\u0440\u0435\u0435\u0437\u0434 \u043d\u0430 2 \u043d\u043e\u0447\u0438",
+                    "Total": 9000,
+                    "Date": "01.02.2022 13:53"
                 }
             ]
         },
@@ -87,96 +87,32 @@
             "Surname": "\u0421\u043f\u0430\u0441\u0441\u043a\u0438\u0439",
             "Lastname": "\u0415\u0432\u0433\u0435\u043d\u044c\u0435\u0432\u0438\u0447",
             "Room": {
-                "Number": 1
+                "Number": 21
             },
-            "Arrival": "31.01.2022 14:23",
+            "Arrival": "01.02.2022 09:53",
             "Departure": {
-                "Date": "01.02.2022",
+                "Date": "03.02.2022",
                 "Time": "18:00"
             },
-            "Stay": "1",
-            "Alerts": [
-                "\u0413\u043e\u0441\u0442\u044c 31.01.2022 14:27 \u043e\u043f\u043b\u0430\u0442\u0438\u043b \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u043a\u043b\u0430\u0441\u0441\u0430 \u0438 \u043f\u0435\u0440\u0435\u0435\u0445\u0430\u043b \u0438\u0437 \u043d\u043e\u043c\u0435\u0440\u0430 16 \u0432 \u043d\u043e\u043c\u0435\u0440 1"
-            ],
-            "Summary": {
-                "Number": 3000,
-                "Breakfast": 1000,
-                "Parking": 1000,
-                "Teeth_kit": 100,
-                "Late_departure": 1500,
-                "Room_upgrade": 1500,
-                "Chem_clean": 2000,
-                "Sew_kit": 100
-            },
+            "Stay": "2",
+            "Alerts": [],
             "Services": {
-                "Breakfast": 1,
-                "Parking": 1,
+                "Breakfast": 0,
+                "Parking": 0,
                 "Extra_bed": 0,
                 "Room_clean": 0,
-                "Chem_clean": 1,
-                "Teeth_kit": 1,
-                "Sew_kit": 1,
-                "Room_upgrade": 1,
+                "Chem_clean": 0,
+                "Teeth_kit": 0,
+                "Sew_kit": 0,
+                "Room_upgrade": 0,
                 "Early_arrival": 0,
-                "Late_departure": 1,
-                "Night_arrival": 0,
-                "Total": 5000
+                "Late_departure": 0,
+                "Night_arrival": 0
             },
-            "Changes": [
-                {
-                    "Breakfast": 1,
-                    "Parking": 1,
-                    "Extra_bed": 0,
-                    "Room_clean": 0,
-                    "Chem_clean": 0,
-                    "Teeth_kit": 0,
-                    "Sew_kit": 0,
-                    "Room_upgrade": 0,
-                    "Early_arrival": 0,
-                    "Late_departure": 0,
-                    "Night_arrival": 0,
-                    "Total": 5000
-                },
-                {
-                    "Breakfast": 0,
-                    "Parking": 0,
-                    "Extra_bed": 0,
-                    "Room_clean": 0,
-                    "Chem_clean": 0,
-                    "Teeth_kit": 100,
-                    "Sew_kit": 0,
-                    "Late_departure": 1500,
-                    "Total": 1600,
-                    "Date": "31.01.2022 14:25"
-                },
-                {
-                    "Room_upgrade": "\u043d\u0430 1 \u043d\u043e\u0447\u0438",
-                    "Total": 1500,
-                    "Date": "31.01.2022 14:27"
-                },
-                {
-                    "Breakfast": 0,
-                    "Parking": 0,
-                    "Extra_bed": 0,
-                    "Room_clean": 0,
-                    "Chem_clean": 2000,
-                    "Teeth_kit": 0,
-                    "Sew_kit": 0,
-                    "Total": 2000,
-                    "Date": "31.01.2022 17:52"
-                },
-                {
-                    "Breakfast": 0,
-                    "Parking": 0,
-                    "Extra_bed": 0,
-                    "Room_clean": 0,
-                    "Chem_clean": 0,
-                    "Teeth_kit": 0,
-                    "Sew_kit": 100,
-                    "Total": 100,
-                    "Date": "31.01.2022 17:54"
-                }
-            ]
+            "Summary": {},
+            "Share": "1_1",
+            "Changes": [],
+            "Share_with": []
         }
     },
     "Room_repair": {}

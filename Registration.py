@@ -152,6 +152,7 @@ def accept_all():
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Departure']['Time'] = '12:00'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Stay'] = f'{delta_days.days}'
             j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Alerts'] = []
+            j_dict['Guests'][f'{series_passport.get()}_{numbers_passport.get()}']['Share_with'] = []
 
             with open('data.json', 'w') as json_file:
                 json.dump(j_dict, json_file, indent=4)
@@ -161,6 +162,7 @@ def accept_all():
                               bg='green')
             result.grid(row=2, column=0, columnspan=6, stick='wens')
 
+            # win.destroy()
             main_win(f'{series_passport.get()}_{numbers_passport.get()}')
 
 

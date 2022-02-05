@@ -44,6 +44,14 @@ def main_summary(num):
         for i in j_dict['Guests'][ID]['Summary']:
             total += j_dict['Guests'][ID]['Summary'][i]
 
+        for i in j_dict['Guests'][ID]['Changes'][:len(j_dict['Guests'][ID]['Changes']) - 1]:
+            if 'Late_departure' in i:
+                total += i['Late_departure']
+
+        for i in j_dict['Guests'][ID]['Changes'][:len(j_dict['Guests'][ID]['Changes'])]:
+            if 'Room_move' in i:
+                total += i['Total']
+
         with open('data.json', 'w') as json_file:
             json.dump(j_dict, json_file, indent=4)
 

@@ -135,6 +135,13 @@ def accept_services():
         j_dict = json.load(json_file)
 
     j_dict['Guests'][ID]['Changes'].append(j_dict['Guests'][ID]['Services'])
+
+    with open('data.json', 'w') as json_file:
+        json.dump(j_dict, json_file, indent=4)
+
+    with open("data.json", 'r') as json_file:
+        j_dict = json.load(json_file)
+
     j_dict['Guests'][ID]['Changes'][0]['Total'] = main_summary(ID)
 
     with open('data.json', 'w') as json_file:

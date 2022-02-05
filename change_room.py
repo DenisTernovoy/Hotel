@@ -10,6 +10,13 @@ def accept(room_repair, num):
     with open('data.json', 'r') as json_file:
         j_dict = json.load(json_file)
 
+    j_dict['Guests'][ID]['Services']['Late_departure'] = 0
+    j_dict['Guests'][ID]['Departure']['Time'] = "12:00"
+
+    if j_dict['Guests'][ID]['Share_with']:
+        for sharing in j_dict['Guests'][ID]['Share_with']:
+            j_dict['Guests'][sharing]['Departure']['Time'] = "12:00"
+
     if upgrade.get():
         j_dict['Room_repair'][room].append('Улучшение класса')
         j_dict['Guests'][ID]['Services']['Room_upgrade'] = 1
@@ -46,7 +53,6 @@ def accept(room_repair, num):
         j_dict['Guests'][ID]['Alerts'].append(
             f'Гость {dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
             f' переехал из номера {room} в номер {new_room} из-за: *{other.get()}')
-
 
     with open('data.json', 'w') as json_file:
         json.dump(j_dict, json_file, indent=4)
@@ -109,6 +115,11 @@ def choice_room(btn, room):
     j_dict['Room_repair'][current_room] = []
 
     j_dict['Guests'][ID]['Room']['Number'] = room
+
+    if j_dict['Guests'][ID]['Share_with']:
+        for sharing in j_dict['Guests'][ID]['Share_with']:
+            j_dict['Guests'][sharing]['Room']['Number'] = room
+
     j_dict['Guests'][ID]['Summary'] = {}
     j_dict['Guests'][ID]['Summary']['Number'] = 3000 * int(j_dict['Guests'][ID]['Stay'])
 
@@ -251,5 +262,5 @@ def change_room_main(num):
     win_r.mainloop()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     change_room_main('1_1')

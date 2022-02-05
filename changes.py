@@ -41,12 +41,18 @@ def accept_all(num):
 
     if j_dict['Guests'][ID]['Services']['Late_departure'] == 1:
         j_dict['Guests'][ID]['Departure']['Time'] = "18:00"
+        if j_dict['Guests'][ID]['Share_with']:
+            for guest in j_dict['Guests'][ID]['Share_with']:
+                j_dict['Guests'][guest]['Departure']['Time'] = "18:00"
         pass
     else:
         temp['Late_departure'] = ld['value'] * 1500
         j_dict['Guests'][ID]['Services']['Late_departure'] = j_dict['Guests'][ID]['Services']['Late_departure'] + \
                                                              ld['value']
-
+        if j_dict['Guests'][ID]['Share_with']:
+            for guest in j_dict['Guests'][ID]['Share_with']:
+                j_dict['Guests'][guest]['Departure']['Time'] = "18:00"
+                print('OKAY')
 
     total = 0
     for i in temp:
@@ -220,11 +226,108 @@ def change_services(num):
     wcs.mainloop()
 
 
-def change_room(num):
+def delete_neighbours(num):
+
+    with open('data.json', 'r') as json_file:
+        j_dict = json.load(json_file)
+
     ID = num
-    win_change.destroy()
+
+    collection = j_dict['Guests'][ID]['Share_with'].copy()
+    del j_dict['Guests'][ID]['Share_with'][:]
+
+    j_dict['Guests'][collection[0]]['Share_with'] = []
+
+    temp_1 = {}
+    date_now = dt.date.today()
+    day = int(j_dict['Guests'][ID]['Departure']['Date'][:2])
+    month = int(j_dict['Guests'][ID]['Departure']['Date'][3:5])
+    year = int(j_dict['Guests'][ID]['Departure']['Date'][6:10])
+    date_departure = dt.date(year, month, day)
+    day_stay = date_departure - date_now
+    stay = int(day_stay.days)
+
+    if dt.time(0, 00, 00) < dt.datetime.now().time() < dt.time(5, 00, 00):
+        stay += 1
+
+    temp_1['Room_move'] = f'переезд на {stay} ночи'
+    temp_1['Total'] = stay * 4500
+    temp_1['Date'] = f'{dt.datetime.today().strftime("%d.%m.%Y %H:%M")}'
+    j_dict['Guests'][ID]['Changes'].append(temp_1)
+    j_dict['Guests'][collection[0]]['Departure']['Time'] = j_dict['Guests'][ID]['Departure']['Time']
+
+    if len(collection) == 2:
+        j_dict['Guests'][collection[0]]['Share_with'].append(collection[1])
+        j_dict['Guests'][collection[1]]['Departure']['Time'] = j_dict['Guests'][ID]['Departure']['Time']
+
+    with open('data.json', 'w') as json_file:
+        json.dump(j_dict, json_file, indent=4)
+
+    temp_win.destroy()
     change_room_main(ID)
 
+
+def change_room_temp(num):
+    ID = num
+    temp_win.destroy()
+    change_room_main(ID)
+
+
+def change_room(num):
+    global temp_win
+
+    ID = num
+    win_change.destroy()
+
+    with open('data.json', 'r') as json_file:
+        j_dict = json.load(json_file)
+
+    if j_dict['Guests'][ID]['Share_with']:
+
+        guests_list = j_dict['Guests'][ID]['Share_with']
+
+        temp_win = tk.Tk()
+        temp_win.title('Гости')
+        temp_win.geometry('320x280+750+350')
+
+        temp_win.rowconfigure(0, minsize=70)
+        temp_win.rowconfigure(1, minsize=70)
+        temp_win.rowconfigure(2, minsize=70)
+        temp_win.rowconfigure(3, minsize=70)
+
+        temp_win.columnconfigure(0, minsize=80)
+        temp_win.columnconfigure(1, minsize=80)
+        temp_win.columnconfigure(2, minsize=80)
+        temp_win.columnconfigure(3, minsize=80)
+
+        temp_win.resizable(False, False)
+
+        tk.Label(temp_win, text='У Вас гости!',
+                 bg='#D0D5DE',
+                 font=("Arial", 18, 'bold')).grid(row=0, column=0, columnspan=4, stick='wens')
+
+        with open('data.json', 'r') as json_file:
+            j_dict = json.load(json_file)
+
+        tk.Label(temp_win,
+                  text=f"{j_dict['Guests'][guests_list[0]]['Name']} {j_dict['Guests'][guests_list[0]]['Surname']}",
+                  bg='#dee9ff',
+                 relief='raised') \
+            .grid(row=1, column=0, columnspan=4, stick='wens')
+
+        if len(guests_list) == 2:
+            tk.Label(temp_win,
+                      text=f"{j_dict['Guests'][guests_list[1]]['Name']} {j_dict['Guests'][guests_list[1]]['Surname']}",
+                      bg='#dee9ff',
+                     relief='raised') \
+                .grid(row=2, column=0, columnspan=4, stick='wens')
+
+        tk.Button(temp_win, text='Разделиться', command=lambda: delete_neighbours(ID), bd=3).\
+            grid(row=3, column=0, columnspan=2, stick='wens')
+        tk.Button(temp_win, text='Совместно', command=lambda: change_room_temp(ID), bd=3).\
+            grid(row=3, column=2, columnspan=2, stick='wens')
+    else:
+        change_room_main(ID)
 
 
 def main_change(num):
@@ -255,7 +358,14 @@ def main_change(num):
 
     tk.Button(win_change, text='Изменить услуги', command=lambda: change_services(ID)).grid(row=1, column=1, columnspan=3, stick='wens')
 
-    tk.Button(win_change, text='Изменить комнату', command=lambda: change_room(ID)).grid(row=3, column=1, columnspan=3, stick='wens')
+    change = tk.Button(win_change, text='Изменить комнату', command=lambda: change_room(ID))
+    change.grid(row=3, column=1, columnspan=3, stick='wens')
+
+    with open("data.json", 'r') as json_file:
+        j_dict = json.load(json_file)
+
+        if 'Share' in j_dict['Guests'][ID]:
+            change['state'] = tk.DISABLED
 
     win_change.mainloop()
 
